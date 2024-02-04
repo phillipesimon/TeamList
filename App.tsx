@@ -6,6 +6,7 @@ import theme from './src/theme';
 import { Groups } from '@screens/Groups';
 import { StatusBar } from 'expo-status-bar';
 import { Loading } from '@components/Loading';
+import { ListEmpity } from '@components/ListEmpity/inedx';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
