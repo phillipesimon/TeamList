@@ -29,7 +29,9 @@ export function Groups() {
                 ListEmptyComponent={() => <ListEmpity message="This list is empity" />}
 
             />
-            <Button title="Create a new team" type="PRIMARY" />
+            <Button
+                title="Create a new team"
+                type="PRIMARY" />
 
         </Container>
     )
