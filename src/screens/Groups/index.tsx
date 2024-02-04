@@ -5,6 +5,7 @@ import { GroupCard } from "@components/GroupCard";
 import { useState } from "react";
 import { FlatList } from "react-native";
 import { ListEmpity } from "@components/ListEmpity/inedx";
+import { Button } from "@components/Button";
 
 export function Groups() {
     const [groups, setGroups] = useState(['Simon'])
@@ -28,6 +29,7 @@ export function Groups() {
                 ListEmptyComponent={() => <ListEmpity message="This list is empity" />}
 
             />
+            <Button title="Create a new team" type="PRIMARY" />
 
         </Container>
     )
