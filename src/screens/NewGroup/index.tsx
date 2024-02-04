@@ -2,6 +2,7 @@ import { Highlight } from "@components/Highlight";
 import { Container, Content, Icon } from "./styles";
 import { Header } from "@components/Header";
 import { Button } from "@components/Button";
+import { Input } from "@components/Input";
 
 
 export function NewGroup() {
@@ -15,7 +16,7 @@ export function NewGroup() {
                     title="New Group"
                     subtitle="Create a new group to add people"
                 />
-
+                <Input />
                 <Button title="Create" />
 
             </Content>
