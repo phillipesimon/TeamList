@@ -27,7 +27,7 @@ export function Groups() {
                 )}
                 contentContainerStyle={groups.length === 0 && { flex: 1 }}
                 ListEmptyComponent={() => <ListEmpty message="This list is empity" />}
-
+                showsVerticalScrollIndicator={false}
             />
             <Button
                 title="Create a new team"
