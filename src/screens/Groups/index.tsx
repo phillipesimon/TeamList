@@ -4,7 +4,7 @@ import { Highlight } from "@components/Highlight";
 import { GroupCard } from "@components/GroupCard";
 import { useState } from "react";
 import { FlatList } from "react-native";
-import { ListEmpity } from "@components/ListEmpity/inedx";
+import { ListEmpty } from "@components/ListEmpty/inedx";
 import { Button } from "@components/Button";
 
 export function Groups() {
@@ -26,7 +26,7 @@ export function Groups() {
                     <GroupCard title={item} />
                 )}
                 contentContainerStyle={groups.length === 0 && { flex: 1 }}
-                ListEmptyComponent={() => <ListEmpity message="This list is empity" />}
+                ListEmptyComponent={() => <ListEmpty message="This list is empity" />}
 
             />
             <Button

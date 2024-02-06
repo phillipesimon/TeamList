@@ -7,7 +7,7 @@ type Props = {
 }
 
 
-export function ListEmpity({ message }: Props) {
+export function ListEmpty({ message }: Props) {
     return (
         <Container>
             <Message>{message}</Message>

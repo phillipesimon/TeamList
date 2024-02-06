@@ -9,11 +9,13 @@ import { ButtonIcon } from "@components/ButoonIcon";
 
 import { Container, Form, HeaderList, NumberOfPlayers } from "./styles";
 import { PlayerCard } from "@components/PlayerCard/indes";
+import { ListEmpty } from "@components/ListEmpty/inedx";
+import { Button } from "@components/Button";
 
 export function Players() {
 
     const [team, setTeam] = useState('TEAM A')
-    const [players, setPlayers] = useState(['Simon', "Phillipe", "Martins", "Costa"])
+    const [players, setPlayers] = useState([])
 
     return (
         <Container>
@@ -57,6 +59,21 @@ export function Players() {
                         onRemove={() => { }}
                     />
                 )}
+
+                ListEmptyComponent={() => (
+                    <ListEmpty
+                        message="This list is empity"
+                    />
+                )}
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={[
+                    { paddingBottom: 100 },
+                    players.length === 0 && { flex: 1 }
+                ]}
+            />
+            <Button
+                title="Remove"
+                type="SECONDARY"
             />
         </Container>
     )
