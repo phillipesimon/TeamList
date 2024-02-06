@@ -1,7 +1,8 @@
 import { Header } from "@components/Header";
-import { Container } from "./styles";
+import { Container, Form } from "./styles";
 import { Highlight } from "@components/Highlight";
 import { ButtonIcon } from "@components/ButoonIcon";
+import { Input } from "@components/Input";
 
 
 export function Players() {
@@ -12,8 +13,10 @@ export function Players() {
                 title="New Team"
                 subtitle="Add players and separate teams"
             />
-
-            <ButtonIcon />
+            <Form>
+                <Input placeholder="Username" autoCorrect={false} />
+                <ButtonIcon icon="add" />
+            </Form>
 
         </Container>
     )
