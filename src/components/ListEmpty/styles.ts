@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components/native";
+import styled, { css } from 'styled-components/native'
 
 export const Container = styled.View`
     flex: 1;
@@ -14,6 +14,4 @@ export const Message = styled.Text`
         color: ${theme.COLORS.GRAY_300};
         font-family: ${theme.FONT_FAMILY.REGULAR};
     `}
-
 `
-

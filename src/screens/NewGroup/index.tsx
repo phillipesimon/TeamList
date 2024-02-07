@@ -1,9 +1,8 @@
-import { Highlight } from "@components/Highlight";
-import { Container, Content, Icon } from "./styles";
-import { Header } from "@components/Header";
-import { Button } from "@components/Button";
-import { Input } from "@components/Input";
-
+import { Button } from '@components/Button'
+import { Header } from '@components/Header'
+import { Highlight } from '@components/Highlight'
+import { Input } from '@components/Input'
+import { Container, Content, Icon } from './styles'
 
 export function NewGroup() {
     return (
@@ -16,13 +15,9 @@ export function NewGroup() {
                     title="New Group"
                     subtitle="Create a new group to add people"
                 />
-                <Input
-                    placeholder="Team name"
-                />
+                <Input placeholder="Team name" />
                 <Button title="Create" />
-
             </Content>
-
         </Container>
     )
 }
