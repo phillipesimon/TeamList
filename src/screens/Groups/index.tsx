@@ -6,9 +6,16 @@ import { ListEmpty } from '@components/ListEmpty/inedx'
 import { useState } from 'react'
 import { FlatList } from 'react-native'
 import { Container } from './styles'
+import { useNavigation } from '@react-navigation/native'
 
 export function Groups() {
-    const [groups, setGroups] = useState(['Simon'])
+    const [groups, setGroups] = useState([])
+
+    const navigation = useNavigation()
+
+    function handleNavigation() {
+        navigation.navigate('new')
+    }
 
     return (
         <Container>
@@ -25,7 +32,7 @@ export function Groups() {
                 )}
                 showsVerticalScrollIndicator={false}
             />
-            <Button title="Create a new team" type="PRIMARY" />
+            <Button title="Create a new team" onPress={handleNavigation} />
         </Container>
     )
 }
