@@ -14,7 +14,7 @@ export function Groups() {
 
     const navigation = useNavigation()
 
-    function handleNavigation() {
+    function handleNewGroup() {
         navigation.navigate('new')
     }
 
@@ -25,6 +25,10 @@ export function Groups() {
         } catch (error) {
             console.log(error)
         }
+    }
+
+    function handleOpenGroup(group: string) {
+        navigation.navigate('players', { group })
     }
 
     useFocusEffect(
@@ -41,14 +45,19 @@ export function Groups() {
             <FlatList
                 data={groups}
                 keyExtractor={(item) => item}
-                renderItem={({ item }) => <GroupCard title={item} />}
+                renderItem={({ item }) => (
+                    <GroupCard
+                        title={item}
+                        onPress={() => handleOpenGroup(item)}
+                    />
+                )}
                 contentContainerStyle={groups.length === 0 && { flex: 1 }}
                 ListEmptyComponent={() => (
                     <ListEmpty message="This list is empity" />
                 )}
                 showsVerticalScrollIndicator={false}
             />
-            <Button title="Create a new team" onPress={handleNavigation} />
+            <Button title="Create a new team" onPress={handleNewGroup} />
         </Container>
     )
 }
