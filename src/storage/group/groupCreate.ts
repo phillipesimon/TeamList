@@ -9,7 +9,7 @@ export async function groupCreate(newGroup: string) {
 
         const groupAlreadyExists = storageGroups.includes(newGroup)
 
-        if (!groupAlreadyExists) {
+        if (groupAlreadyExists) {
             throw new AppError(
                 'There is already a group registered with that name'
             )

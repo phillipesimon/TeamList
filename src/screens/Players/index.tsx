@@ -29,7 +29,7 @@ export function Players() {
         <Container>
             <Header showBackButton />
             <Highlight
-                title="New Team"
+                title={group}
                 subtitle="Add players and separate teams"
             />
             <Form>
