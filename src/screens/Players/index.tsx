@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FlatList } from 'react-native'
+import { Alert, FlatList } from 'react-native'
 
 import { ButtonIcon } from '@components/ButoonIcon'
 import { Filter } from '@components/Filter'
@@ -12,18 +12,46 @@ import { ListEmpty } from '@components/ListEmpty/inedx'
 import { PlayerCard } from '@components/PlayerCard/indes'
 import { Container, Form, HeaderList, NumberOfPlayers } from './styles'
 import { useRoute } from '@react-navigation/native'
+import { AppError } from '@utils/AppError'
+import { playerAddByGroup } from '@storage/player/playerAddByGroup'
+import { playersGetByGroup } from '@storage/player/playersGetByGroup'
 
 type RouteParams = {
     group: string
 }
 
 export function Players() {
+    const [newPlayerName, setNewPlayerName] = useState('')
     const [team, setTeam] = useState('TEAM A')
     const [players, setPlayers] = useState([])
 
     const route = useRoute()
 
     const { group } = route.params as RouteParams
+
+    async function handleAddPlayer() {
+        if (newPlayerName.trim().length === 0) {
+            return Alert.alert('New Player', 'Enter player name')
+        }
+
+        const newPlayer = {
+            name: newPlayerName,
+            team,
+        }
+
+        try {
+            await playerAddByGroup(newPlayer, group)
+            const players = await playersGetByGroup(group)
+            console.log(players)
+        } catch (error) {
+            if (error instanceof AppError) {
+                Alert.alert('New Player', error.message)
+            } else {
+                Alert.alert('New Player', 'Failed to create new player!')
+                console.log(error)
+            }
+        }
+    }
 
     return (
         <Container>
@@ -33,8 +61,12 @@ export function Players() {
                 subtitle="Add players and separate teams"
             />
             <Form>
-                <Input placeholder="Username" autoCorrect={false} />
-                <ButtonIcon icon="add" />
+                <Input
+                    onChangeText={setNewPlayerName}
+                    placeholder="Username"
+                    autoCorrect={false}
+                />
+                <ButtonIcon icon="add" onPress={handleAddPlayer} />
             </Form>
 
             <HeaderList>
