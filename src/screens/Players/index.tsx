@@ -15,6 +15,8 @@ import { useRoute } from '@react-navigation/native'
 import { AppError } from '@utils/AppError'
 import { playerAddByGroup } from '@storage/player/playerAddByGroup'
 import { playersGetByGroup } from '@storage/player/playersGetByGroup'
+import { PlayerStorageDTO } from '@storage/player/PlayerStorageDTO'
+import { playersGetByGroupAndTeam } from '@storage/player/playerGetByGroupAndTeam'
 
 type RouteParams = {
     group: string
@@ -23,7 +25,7 @@ type RouteParams = {
 export function Players() {
     const [newPlayerName, setNewPlayerName] = useState('')
     const [team, setTeam] = useState('TEAM A')
-    const [players, setPlayers] = useState([])
+    const [players, setPlayers] = useState<PlayerStorageDTO[]>([])
 
     const route = useRoute()
 
@@ -50,6 +52,16 @@ export function Players() {
                 Alert.alert('New Player', 'Failed to create new player!')
                 console.log(error)
             }
+        }
+    }
+
+    async function fetchPlayersByTeam() {
+        try {
+            const playersByTeam = await playersGetByGroupAndTeam(group, team)
+            setPlayers(playersByTeam)
+        } catch (error) {
+            console.log(error)
+            Alert.alert('People', 'Failed to fetch players')
         }
     }
 
