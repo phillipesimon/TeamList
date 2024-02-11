@@ -11,13 +11,14 @@ import { Button } from '@components/Button'
 import { ListEmpty } from '@components/ListEmpty/inedx'
 import { PlayerCard } from '@components/PlayerCard/indes'
 import { Container, Form, HeaderList, NumberOfPlayers } from './styles'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import { AppError } from '@utils/AppError'
 import { playerAddByGroup } from '@storage/player/playerAddByGroup'
 import { playersGetByGroup } from '@storage/player/playersGetByGroup'
 import { PlayerStorageDTO } from '@storage/player/PlayerStorageDTO'
 import { playersGetByGroupAndTeam } from '@storage/player/playerGetByGroupAndTeam'
 import { playerRemoveByGroup } from '@storage/player/playerRemoveByGroup'
+import { groupRemoveByName } from '@storage/group/groupRemoveByName'
 
 type RouteParams = {
     group: string
@@ -27,6 +28,7 @@ export function Players() {
     const [newPlayerName, setNewPlayerName] = useState('')
     const [team, setTeam] = useState('TEAM A')
     const [players, setPlayers] = useState<PlayerStorageDTO[]>([])
+    const navigation = useNavigation()
 
     const route = useRoute()
 
@@ -77,6 +79,23 @@ export function Players() {
             console.log(error)
             Alert.alert('People', 'Failed to remove player')
         }
+    }
+
+    async function groupRemove() {
+        try {
+            await groupRemoveByName(group)
+            navigation.navigate('groups')
+        } catch (error) {
+            console.log(error)
+            Alert.alert('People', 'Failed to remove group')
+        }
+    }
+
+    async function handleGroupRemove() {
+        Alert.alert('Remove', 'Do you want to remove this group?', [
+            { text: 'No', style: 'cancel' },
+            { text: 'Yes', onPress: () => groupRemove() },
+        ])
     }
 
     useEffect(() => {
@@ -138,7 +157,11 @@ export function Players() {
                     players.length === 0 && { flex: 1 },
                 ]}
             />
-            <Button title="Remove" type="SECONDARY" />
+            <Button
+                title="Remove"
+                type="SECONDARY"
+                onPress={handleGroupRemove}
+            />
         </Container>
     )
 }
